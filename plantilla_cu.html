@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plantilla de Caso de Uso</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            padding: 20px;
+        }
+        .container {
+            width: 60%;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #82C230;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #008000;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Plantilla de Caso de Uso</h2>
+        <div class="form-group">
+            <label for="nombreCaso">Nombre del Caso de Uso:</label>
+            <input type="text" id="nombreCaso" name="nombreCaso">
+        </div>
+        <div class="form-group">
+            <label for="area">Área:</label>
+            <input type="text" id="area" name="area">
+        </div>
+        <div class="form-group">
+            <label for="actor">Actor(es):</label>
+            <input type="text" id="actor" name="actor">
+        </div>
+        <div class="form-group">
+            <label for="interesados">Interesados:</label>
+            <input type="text" id="interesados" name="interesados">
+        </div>
+        <div class="form-group">
+            <label for="nivel">Nivel:</label>
+            <input type="text" id="nivel" name="nivel">
+        </div>
+        <div class="form-group">
+            <label for="descripcion">Descripción:</label>
+            <textarea id="descripcion" name="descripcion" rows="4"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="desencadenante">Evento desencadenador:</label>
+            <input type="text" id="desencadenante" name="desencadenante" >
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label for="pasosRealizados">Pasos Realizados:</label>
+                <textarea id="pasosRealizados" name="pasosRealizados" rows="4"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="infoPasos">Información para los Pasos:</label>
+                <textarea id="infoPasos" name="infoPasos" rows="4"></textarea>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="precondiciones">Precondiciones:</label>
+            <textarea id="precondiciones" name="precondiciones" rows="3"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="postcondiciones">Postcondiciones:</label>
+            <textarea id="postcondiciones" name="postcondiciones" rows="3"></textarea>
+        </div>
+        
+        <div class="form-group">
+            <label for="escenarioExitoso">Escenario de Caso Exitoso:</label>
+            <textarea id="escenarioExitoso" name="escenarioExitoso" rows="4"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="prioridad">Prioridad:</label>
+            <input type="text" id="prioridad" name="prioridad">
+        </div>
+        <button id="generarPDF">Generar PDF</button>
+    </div>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+    <script>
+        document.getElementById('generarPDF').addEventListener('click', () => {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+            
+            const nombreCaso = document.getElementById('nombreCaso').value;
+            const actor = document.getElementById('actor').value;
+            const precondiciones = document.getElementById('precondiciones').value;
+            const postcondiciones = document.getElementById('postcondiciones').value;
+            const descripcion = document.getElementById('descripcion').value;
+            const escenarioExitoso = document.getElementById('escenarioExitoso').value;
+            
+            doc.text(`Nombre del Caso de Uso: ${nombreCaso}`, 10, 10);
+            doc.text(`Actor: ${actor}`, 10, 20);
+            doc.text(`Precondiciones: ${precondiciones}`, 10, 30);
+            doc.text(`Postcondiciones: ${postcondiciones}`, 10, 40);
+            doc.text(`Descripción: ${descripcion}`, 10, 50);
+            doc.text(`Escenario de Caso Exitoso: ${escenarioExitoso}`, 10, 60);
+            
+            doc.save('caso_de_uso.pdf');
+        });
+    </script>
+</body>
+</html>
